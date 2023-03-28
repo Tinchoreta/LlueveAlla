@@ -45,7 +45,7 @@ let weatherResult = {
                 city.textContent = "Clima en: " + name;
                 img.src = "https://openweathermap.org/img/wn/" + icon + ".png"
                 detalle.textContent = "Detalle: "+ description.charAt(0).toUpperCase()+ description.slice(1);
-                temperature.textContent = temp + "º";
+                temperature.textContent = "Temperatura: "+ temp + "º";
                 console.log(temp + " " + name + " icon.src: " + icon.src  + " descr: " + description)
             }
         } catch (error) {
