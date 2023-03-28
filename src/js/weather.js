@@ -32,7 +32,7 @@ let weatherResult = {
         } catch (error) {
             console.log(error + " en fetch")
         }
-        finally{
+        finally {
             console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&lang=es&appid=" + API_KEY)
         }
     }
@@ -46,20 +46,12 @@ let weatherResult = {
                 const { temp, humidity } = weatherInfo.main;
                 city.textContent = "Clima en: " + name;
                 img.src = "https://openweathermap.org/img/wn/" + icon + ".png"
-                detalle.textContent = "Detalle: "+ description.charAt(0).toUpperCase()+ description.slice(1);
-                temperature.textContent = "Temperatura: "+ temp + "º";
-                console.log(temp + " " + name + " icon.src: " + icon.src  + " descr: " + description)
-             
-            // Muestra los resultados si están ocultos
-            if (results.style.display === "none") {
+                detalle.textContent = "Detalle: " + description.charAt(0).toUpperCase() + description.slice(1);
+                temperature.textContent = "Temperatura: " + temp + "º";
+                console.log(temp + " " + name + " icon.src: " + icon + " descr: " + description)
+
                 results.style.display = "block";
             }
-        } else {
-            // Oculta los resultados si están visibles
-            if (results.style.display === "block") {
-                results.style.display = "none";
-            }
-        }
         } catch (error) {
             console.log(error + " en display")
         }
@@ -74,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
 const botonBuscarClima = document.getElementById('searchWeather');
 
 botonBuscarClima.addEventListener('click', () => {
-    
-   if(cities.value){
-    weatherResult.getWeather(cities.value);
-    } 
+
+    if (cities.value) {
+        weatherResult.getWeather(cities.value);
+    }
 
 });
 const options = {
