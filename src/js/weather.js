@@ -6,6 +6,8 @@ const detalle = document.querySelector('.detalle');
 const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 const city = document.querySelector('.city');
+const results = document.querySelector('.results');
+
 
 
 
@@ -47,7 +49,17 @@ let weatherResult = {
                 detalle.textContent = "Detalle: "+ description.charAt(0).toUpperCase()+ description.slice(1);
                 temperature.textContent = "Temperatura: "+ temp + "º";
                 console.log(temp + " " + name + " icon.src: " + icon.src  + " descr: " + description)
+             
+            // Muestra los resultados si están ocultos
+            if (results.style.display === "none") {
+                results.style.display = "block";
             }
+        } else {
+            // Oculta los resultados si están visibles
+            if (results.style.display === "block") {
+                results.style.display = "none";
+            }
+        }
         } catch (error) {
             console.log(error + " en display")
         }
@@ -62,8 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
 const botonBuscarClima = document.getElementById('searchWeather');
 
 botonBuscarClima.addEventListener('click', () => {
-    console.log(cities.value)
-    cities.value? weatherResult.getWeather(cities.value) : "No eligió nada";
+    
+   if(cities.value){
+    weatherResult.getWeather(cities.value);
+    } 
+
 });
 const options = {
     data:

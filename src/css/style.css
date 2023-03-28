@@ -36,3 +36,12 @@ h1{
 .material-icons{
     font-size: 50px;
 }
+
+.results{
+    display: none;
+}
+
+.cities{
+    min-width: 6em;
+    max-width: 100vw;
+}
