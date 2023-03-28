@@ -1,10 +1,12 @@
 const API_KEY = "ef6db81ac57f4d48fee6af442b8c8ddf";
 const cities = document.getElementById('autocomplete-input');
 const temperature = document.querySelector('.temp');
-const icon = document.querySelector('.icon');
-const description = document.querySelector('.description');
+const img = document.querySelector('.img');
+const detalle = document.querySelector('.detalle');
 const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
+const city = document.querySelector('.city');
+
 
 
 
@@ -37,13 +39,14 @@ let weatherResult = {
         try {
             if (weatherInfo) {
                 const { name } = weatherInfo;
-                const { icon, description } = weatherInfo.weather[0] ? weatherInfo.weather[0] : "No hay datos";
-                const { speed } = weatherInfo.speed;
+                const { icon, description } = weatherInfo.weather[0];
+                const { speed } = weatherInfo.wind;
                 const { temp, humidity } = weatherInfo.main;
-                cities.textContent = "Clima en: " + name;
-                icon.src = "https://openweathermap.org/img/wn/" + icon + ".png"
-                temperature.textContent = temp;
-                console.log(temp + " " + name)
+                city.textContent = "Clima en: " + name;
+                img.src = "https://openweathermap.org/img/wn/" + icon + ".png"
+                detalle.textContent = "Detalle: "+ description.charAt(0).toUpperCase()+ description.slice(1);
+                temperature.textContent = temp + "º";
+                console.log(temp + " " + name + " icon.src: " + icon.src  + " descr: " + description)
             }
         } catch (error) {
             console.log(error + " en display")
@@ -60,7 +63,7 @@ const botonBuscarClima = document.getElementById('searchWeather');
 
 botonBuscarClima.addEventListener('click', () => {
     console.log(cities.value)
-    cities.value > 0 ? weatherResult.getWeather(cities.value) : "No eligió nada";
+    cities.value? weatherResult.getWeather(cities.value) : "No eligió nada";
 });
 const options = {
     data:
