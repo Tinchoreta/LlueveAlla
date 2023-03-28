@@ -97,7 +97,7 @@ const options = {
         "Santa Cruz": null,
         "Santa Fe": null,
         "Santiago del Estero": null,
-        "Tierra del Fuego": null,
+        "Ushuaia": null,
         "Tucumán": null
     }
 }
