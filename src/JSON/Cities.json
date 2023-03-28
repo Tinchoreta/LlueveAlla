@@ -1,0 +1,98 @@
+[
+  {
+    "code": "AR-B",
+    "city": "Buenos Aires"
+  },
+  {
+    "code": "AR-K",
+    "city": "Catamarca"
+  },
+  {
+    "code": "AR-H",
+    "city": "Chaco"
+  },
+  {
+    "code": "AR-U",
+    "city": "Chubut"
+  },
+  {
+    "code": "AR-C",
+    "city": "Ciudad Autónoma de Buenos Aires"
+  },
+  {
+    "code": "AR-W",
+    "city": "Corrientes"
+  },
+  {
+    "code": "AR-X",
+    "city": "Córdoba"
+  },
+  {
+    "code": "AR-E",
+    "city": "Entre Ríos"
+  },
+  {
+    "code": "AR-P",
+    "city": "Formosa"
+  },
+  {
+    "code": "AR-Y",
+    "city": "Jujuy"
+  },
+  {
+    "code": "AR-L",
+    "city": "La Pampa"
+  },
+  {
+    "code": "AR-F",
+    "city": "La Rioja"
+  },
+  {
+    "code": "AR-M",
+    "city": "Mendoza"
+  },
+  {
+    "code": "AR-N",
+    "city": "Misiones"
+  },
+  {
+    "code": "AR-Q",
+    "city": "Neuquén"
+  },
+  {
+    "code": "AR-R",
+    "city": "Río Negro"
+  },
+  {
+    "code": "AR-A",
+    "city": "Salta"
+  },
+  {
+    "code": "AR-J",
+    "city": "San Juan"
+  },
+  {
+    "code": "AR-D",
+    "city": "San Luis"
+  },
+  {
+    "code": "AR-Z",
+    "city": "Santa Cruz"
+  },
+  {
+    "code": "AR-S",
+    "city": "Santa Fe"
+  },
+  {
+    "code": "AR-G",
+    "city": "Santiago del Estero"
+  },
+  {
+    "code": "AR-V",
+    "city": "Tierra del Fuego"
+  },
+  {
+    "code": "AR-T",
+    "city": "Tucumán"
+  }
+]
