@@ -39,9 +39,20 @@ h1{
 
 .results{
     display: none;
+    z-index: 9999; /* para que el panel esté en el frente de todos los demás elementos */
+    
 }
 
 .cities{
     min-width: 6em;
     max-width: 100vw;
 }
+
+@media screen and (max-width: 480px) {
+    h1{
+        font-size: 1.5em !important;
+    }
+    .results {
+      max-height: 60vh;
+    }
+  }
