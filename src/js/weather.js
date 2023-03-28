@@ -20,16 +20,16 @@ let weatherResult = {
 
     getWeather: function (city) {
         try {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&appid=" + API_KEY)
+            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&lang=es&appid=" + API_KEY)
                 .then((response) => response.json())
                 .then((info) => this.displayWeather(info))
 
-            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&appid=" + API_KEY)
+            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&lang=es&appid=" + API_KEY)
         } catch (error) {
             console.log(error + " en fetch")
         }
         finally{
-            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&appid=" + API_KEY)
+            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR-X&units=metric&lang=es&appid=" + API_KEY)
         }
     }
     ,
@@ -60,7 +60,7 @@ const botonBuscarClima = document.getElementById('searchWeather');
 
 botonBuscarClima.addEventListener('click', () => {
     console.log(cities.value)
-    cities.textContent > 0 ? weatherResult.getWeather(cities.value) : "";
+    cities.value > 0 ? weatherResult.getWeather(cities.value) : "No eligió nada";
 });
 const options = {
     data:
