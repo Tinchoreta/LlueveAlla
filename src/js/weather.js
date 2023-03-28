@@ -39,7 +39,13 @@ let weatherResult = {
     ,
     displayWeather: function (weatherInfo) {
         try {
-            if (weatherInfo) {
+            if (typeof(weatherInfo)!= 'undefined') {
+                console.log(weatherInfo)
+                city.textContent = "Clima en: ";
+                img.src = "";
+                detalle.textContent = "Detalle: ";
+                temperature.textContent = "Temperatura: º";
+
                 const { name } = weatherInfo;
                 const { icon, description } = weatherInfo.weather[0];
                 const { speed } = weatherInfo.wind;
@@ -51,6 +57,9 @@ let weatherResult = {
                 console.log(temp + " " + name + " icon.src: " + icon + " descr: " + description)
 
                 results.style.display = "block";
+            }
+            else{
+                results.style.display = "none";
             }
         } catch (error) {
             console.log(error + " en display")
@@ -84,7 +93,7 @@ const options = {
         "Córdoba": null,
         "Entre Ríos": null,
         "Formosa": null,
-        "Jujuy": null,
+        "San Salvador de Jujuy": null,
         "La Pampa": null,
         "La Rioja": null,
         "Mendoza": null,
