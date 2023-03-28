@@ -6,6 +6,8 @@ const description = document.querySelector('.description');
 const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 
+
+
 /* WEATHER APP
 
     Selecciono una ciudad y me trae los datos del clima. 
@@ -35,7 +37,7 @@ const displayWeather = (weatherInfo)=>{
             cities.textContent = "Clima en: " + name;
             icon.src = "https://openweathermap.org/img/wn/" + icon + ".png"
             temperature.textContent = temp;
-            
+
         }
     } catch (error) {
         console.log(error)
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Autocomplete.init(elems, options);
   });
 
-const botonBuscarClima = document.querySelector("btn");
+  const botonBuscarClima = document.getElementById('searchWeather');
 
 botonBuscarClima.addEventListener('click',()=>{
     getWeather(cities)
