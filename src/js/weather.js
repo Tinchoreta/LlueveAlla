@@ -59,8 +59,8 @@ let weatherResult = {
 
 }
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.autocomplete');
-    var instances = M.Autocomplete.init(elems, options);
+    
+    var instances = M.Autocomplete.init(cities, options);
 });
 
 const botonBuscarClima = document.getElementById('searchWeather');
