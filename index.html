@@ -1,80 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!--Import Google Icon Font-->
+    <title>¿Allá Llueve?</title>
+
+    <meta property="og:title" content="¿Allá Llueve?">
+    <meta property="og:site_name" content="¿Allá Llueve?">
+    <meta property="og:url" content="https://tinchoreta.github.io/LlueveAlla/">
+    <meta property="og:description" content="Chequeá el clima en tu ciudad · Argentina">
+    <meta property="og:type" content="website">
+
+    <!-- Fuentes modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="./src/css/materialize.min.css" media="screen,projection" />
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Materialize (solo para el autocomplete JS) -->
+    <link rel="stylesheet" href="./src/css/materialize.min.css">
 
-    <meta property="og:title" content=Llueve Allá?>
-    <meta property="og:site_name" content=Llueve Allá?>
-    <meta property="og:url" content=https://tinchoreta.github.io/LlueveAlla//>
-    <meta property="og:description" content=Chequeá el clima en tu ciudad - Argentina>
-    <meta property="og:type" content=website>
-    <meta property="og:image" content=https://ibb.co/9wGCvYh>
-
-
-    <title>Allá llueve?</title>
-
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="./src/css/style.css">
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <script defer src="./src/js/weather.js"></script>
 </head>
+<body>
 
-<body class="blue-grey darken-4 container">
+    <!-- Fondo animado -->
+    <div class="bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="particles">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
 
-    <h1 class="green-text accent-2 center-align flow-text">¡Bienvenido!</h1>
-    <h2 class="green-text accent-3 center-align flow-text">Consultá el clima en tu ciudad</h2>
+    <div class="app">
 
-    <div class="weather_container">
-        <div class="search_container">
-            <div class="row">
-                <div class="col s12">
-                    <div class="row">
-                        <div class="input-field col s3">
-                            <i class="large material-icons prefix">location_city</i>
-                            <input type="text" id="autocomplete-input" class="autocomplete cities">
-                            <label for="autocomplete-input">Ciudad</label>
-                        </div>
-                    </div>
-                </div>
+        <header class="app-header">
+            <h1 class="app-title">¿Allá Llueve?</h1>
+            <p class="app-subtitle">Clima en tiempo real &middot; Argentina</p>
+        </header>
+
+        <div class="search-wrapper">
+            <div class="search-box">
+                <i class="material-icons search-icon">location_on</i>
+                <input
+                    type="text"
+                    id="autocomplete-input"
+                    class="autocomplete cities city-input"
+                    placeholder="Ingresá una ciudad..."
+                    autocomplete="off"
+                >
             </div>
-            <button class="btn waves-effect waves-light" id="searchWeather" type="submit" name="action">Buscar
-                <i class="material-icons right">search</i>
+            <button id="searchWeather" class="search-btn">
+                <i class="material-icons">search</i>
+                <span>Buscar</span>
             </button>
         </div>
-        <div class="card-panel blue-grey lighten-2 row lime-text darken-3 results">
 
-            <div class="col s12">
-                <h4 class="city">Ciudad</h4>
-            </div>
+        <!-- Tarjeta de resultados -->
+        <div class="weather-card results">
 
-            <div class="col s9">
-                <h4 class="detalle">detalle</h4>
-            </div>
-            <div class="col s3">
-                <img src="" class="img" alt="Icono del clima">
+            <div class="card-shine"></div>
+
+            <div class="city-row">
+                <i class="material-icons city-pin">place</i>
+                <h2 class="city"></h2>
             </div>
 
-            <div class="col s12">
-                <h4 class="temp">.</h4>
+            <div class="weather-main">
+                <div class="temp-block">
+                    <div class="temp-display">
+                        <span class="temp-number">--</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <p class="detalle"></p>
+                </div>
+                <div class="icon-block">
+                    <div class="icon-ring"></div>
+                    <img src="" class="img weather-icon" alt="Icono del clima">
+                </div>
             </div>
+
+            <div class="stats-row">
+                <div class="stat">
+                    <i class="material-icons stat-icon">water_drop</i>
+                    <span class="humidity-value humidity">--</span>
+                    <label class="stat-label">Humedad</label>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <i class="material-icons stat-icon">air</i>
+                    <span class="wind-value wind">--</span>
+                    <label class="stat-label">Viento</label>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <i class="material-icons stat-icon">thermostat</i>
+                    <span class="feels-value">--</span>
+                    <label class="stat-label">Térmica</label>
+                </div>
+            </div>
+
         </div>
-    </div>
 
     </div>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="./src/js/materialize.min.js"></script>
+
+    <script src="./src/js/materialize.min.js"></script>
     <script src="./src/js/sweetalert2.all.min.js"></script>
 </body>
-
 </html>

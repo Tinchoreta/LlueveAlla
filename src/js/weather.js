@@ -1,116 +1,105 @@
-const API_KEY = "ef6db81ac57f4d48fee6af442b8c8ddf";
-const cities = document.getElementById('autocomplete-input');
-const temperature = document.querySelector('.temp');
-const img = document.querySelector('.img');
-const detalle = document.querySelector('.detalle');
-const humidity = document.querySelector('.humidity');
-const wind = document.querySelector('.wind');
-const city = document.querySelector('.city');
-const results = document.querySelector('.results');
+const API_KEY    = "ef6db81ac57f4d48fee6af442b8c8ddf";
+const cityInput  = document.getElementById('autocomplete-input');
+const cityLabel  = document.querySelector('.city');
+const weatherImg = document.querySelector('.weather-icon');
+const detalle    = document.querySelector('.detalle');
+const tempNumber = document.querySelector('.temp-number');
+const humidVal   = document.querySelector('.humidity-value');
+const windVal    = document.querySelector('.wind-value');
+const feelsVal   = document.querySelector('.feels-value');
+const resultsCard = document.querySelector('.results');
 
-const detalleParent = detalle.parentNode;
-const imgParent = img.parentNode;
-
-// import Swal from 'sweetalert2';
-// const Swal = require('sweetalert2')
-
-/* WEATHER APP
-
-    Selecciono una ciudad y me trae los datos del clima. 
-    Utilizo:
-
- https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} 
-
- */
 let weatherResult = {
 
     getWeather: function (city) {
         try {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR&units=metric&lang=es&appid=" + API_KEY)
+            fetch(
+                "https://api.openweathermap.org/data/2.5/weather?q=" +
+                city + ",AR&units=metric&lang=es&appid=" + API_KEY
+            )
                 .then((response) => response.json())
-                .then((info) => this.displayWeather(info))
-
-            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR&units=metric&lang=es&appid=" + API_KEY)
+                .then((info) => this.displayWeather(info));
         } catch (error) {
-            console.log(error + " en fetch")
+            console.log(error + " en fetch");
         }
-        finally {
-            console.log("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",AR&units=metric&lang=es&appid=" + API_KEY)
-        }
-    }
-    ,
+    },
+
     displayWeather: function (weatherInfo) {
         try {
-            if (typeof (weatherInfo) != 'undefined' && weatherInfo.cod != "404") {
-                // Selecciona los elementos HTML
+            if (weatherInfo && weatherInfo.cod != "404") {
+                const { name }                         = weatherInfo;
+                const { icon, description }            = weatherInfo.weather[0];
+                const { speed }                        = weatherInfo.wind;
+                const { temp, humidity, feels_like }   = weatherInfo.main;
 
-                 console.log(weatherInfo);   
+                cityLabel.textContent  = name;
+                detalle.textContent    = description.charAt(0).toUpperCase() + description.slice(1);
+                weatherImg.src         = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+                humidVal.textContent   = humidity + "%";
+                windVal.textContent    = Math.round(speed * 3.6) + " km/h";
+                feelsVal.textContent   = Math.round(feels_like) + "°";
 
-                // Aplica las clases dependiendo del tipo de dispositivo
-                if (window.innerWidth > 600) { // Pantalla grande
-                    detalleParent.classList.remove('s9');
-                    detalleParent.classList.add('s6');
-                    imgParent.classList.remove('s3');
-                    imgParent.classList.add('s6');
-                } else { // Pantalla pequeña
-                    detalleParent.classList.remove('s6');
-                    detalleParent.classList.add('s9');
-                    imgParent.classList.remove('s6');
-                    imgParent.classList.add('s3');
-                }
-                city.textContent = "Clima en: ";
-                img.src = "";
-                detalle.textContent = "Detalle: ";
-                temperature.textContent = "Temperatura: º";
+                animateTemperature(Math.round(temp));
 
-                const { name } = weatherInfo;
-                const { icon, description } = weatherInfo.weather[0];
-                const { speed } = weatherInfo.wind;
-                const { temp, humidity } = weatherInfo.main;
-                city.textContent = "Clima en: " + name;
-                img.src = "https://openweathermap.org/img/wn/" + icon + ".png"
-                detalle.textContent = "Detalle: " + description.charAt(0).toUpperCase() + description.slice(1);
-                temperature.textContent = "Temperatura: " + temp + "º";
-                console.log(temp + " " + name + " icon.src: " + icon + " descr: " + description)
+                resultsCard.style.display = "block";
+                resultsCard.classList.remove('card-visible');
+                void resultsCard.offsetWidth; // reiniciar animación CSS
+                resultsCard.classList.add('card-visible');
 
-                results.style.display = "block";
-            }
-            else {
-                results.style.display = "none";
+            } else {
+                resultsCard.style.display = "none";
+                resultsCard.classList.remove('card-visible');
 
-                if(weatherInfo.cod == "404") 
-                {
+                if (weatherInfo && weatherInfo.cod == "404") {
                     Swal.fire({
-                        title: 'Ciudad no encontrada!',
-                        text: 'Lamentablemente no encontramos la ciudad',
+                        title: 'Ciudad no encontrada',
+                        text: 'No encontramos esa ciudad en Argentina.',
                         icon: 'warning',
-                        confirmButtonText: 'OK'
-                  });
-
-                  cities.value = "";
-                  cities.focus();
+                        background: '#081428',
+                        color: '#d8f0f8',
+                        iconColor: '#a855f7',
+                        confirmButtonColor: '#00f5ff',
+                        confirmButtonText: 'Intentar de nuevo',
+                        customClass: { popup: 'swal-futurista' }
+                    });
+                    cityInput.value = "";
+                    cityInput.focus();
                 }
-              
             }
         } catch (error) {
-            console.log(error + " en display")
+            console.log(error + " en display");
         }
     }
+};
 
+function animateTemperature(target) {
+    const duration = 900;
+    const startTs  = Date.now();
+
+    function step() {
+        const elapsed  = Date.now() - startTs;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3); // ease-out cúbico
+        tempNumber.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
 }
-document.addEventListener('DOMContentLoaded', function () {
 
-    var instances = M.Autocomplete.init(cities, options);
+document.addEventListener('DOMContentLoaded', function () {
+    M.Autocomplete.init(cityInput, options);
 });
 
-const botonBuscarClima = document.getElementById('searchWeather');
-
-botonBuscarClima.addEventListener('click', () => {
-
-    if (cities.value) {
-        weatherResult.getWeather(cities.value.trim());
+document.getElementById('searchWeather').addEventListener('click', () => {
+    if (cityInput.value) {
+        weatherResult.getWeather(cityInput.value.trim());
     }
+});
 
+cityInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && cityInput.value) {
+        weatherResult.getWeather(cityInput.value.trim());
+    }
 });
 const options = {
     data:
