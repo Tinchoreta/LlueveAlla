@@ -221,10 +221,18 @@ html, body {
     opacity: 0.85;
 }
 
+/* Wrapper input-field (requerido por Materialize para el autocomplete) */
+.ac-field {
+    flex: 1;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* Input de ciudad — anula estilos de Materialize */
 .city-input,
 input#autocomplete-input {
-    flex: 1;
+    width: 100% !important;
     background: transparent !important;
     border: none !important;
     border-bottom: none !important;
@@ -238,6 +246,7 @@ input#autocomplete-input {
     margin: 0 !important;
     height: auto !important;
     line-height: 1.4 !important;
+    display: block !important;
 }
 
 .city-input::placeholder {
@@ -246,7 +255,8 @@ input#autocomplete-input {
 }
 
 /* Anular label de Materialize */
-label[for="autocomplete-input"] {
+label[for="autocomplete-input"],
+.ac-field label {
     display: none !important;
 }
 
@@ -255,17 +265,29 @@ label[for="autocomplete-input"] {
     background: #081428 !important;
     border: 1px solid var(--border) !important;
     border-radius: 14px !important;
-    margin-top: 8px !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0,245,255,0.06) !important;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
+    margin-top: 6px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0,245,255,0.06) !important;
+    overflow: hidden !important;
+    overflow-y: auto !important;
+    max-height: 240px !important;
+    z-index: 99999 !important;
+    /* Alinear con el borde izquierdo del search-box */
+    left: 0 !important;
+    min-width: 100% !important;
+}
+
+.autocomplete-content.dropdown-content li {
+    line-height: 1.4 !important;
+    min-height: unset !important;
 }
 
 .autocomplete-content.dropdown-content li > a,
 .autocomplete-content.dropdown-content li > span {
     color: var(--text) !important;
     font-family: var(--font-ui) !important;
-    font-size: 0.92rem !important;
+    font-size: 0.9rem !important;
+    padding: 10px 16px !important;
+    display: block !important;
 }
 
 .autocomplete-content.dropdown-content li:hover,
@@ -276,6 +298,7 @@ label[for="autocomplete-input"] {
 .autocomplete-content.dropdown-content li .highlight {
     color: var(--cyan) !important;
     font-weight: 600;
+    background: transparent !important;
 }
 
 /* Botón de búsqueda */

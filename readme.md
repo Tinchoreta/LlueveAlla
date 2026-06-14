@@ -1,23 +1,68 @@
-# **Allá Llueve?**
+# ¿Allá Llueve? 🌦️
 
-Este es un sitio web que te permite verificar el clima de una ciudad argentina en tiempo real. El sitio está programado en **JavaScript** utilizando el framework **Materialize** y utiliza **CSS** para la presentación visual. Además, se utiliza **SweetAlert** para mostrar mensajes al usuario y se utiliza un **FETCH** para obtener los datos climáticos de la API de **OpenWeatherMap**.
+Consultor de clima en tiempo real para ciudades argentinas. Ingresás el nombre de cualquier ciudad del país y obtenés al instante la temperatura, descripción del tiempo, humedad, viento y sensación térmica.
 
-## Cómo utilizar Allá Llueve?
+**[Ver demo →](https://tinchoreta.github.io/LlueveAlla/)**
 
-1. Ingresar al sitio web de Allá Llueve.
-2. Ingresar el nombre de la ciudad argentina en el campo de búsqueda.
-3. Presionar el botón "Buscar".
-4. Si la ciudad es válida, se mostrará la información climática actual de la ciudad.
-5. Si la ciudad no es válida o no se encuentra en Argentina, se mostrará un mensaje de error.
+---
 
-## Cómo funciona Allá Llueve?
+## Características
 
-Allá Llueve utiliza la API de OpenWeatherMap para obtener los datos climáticos de la ciudad argentina ingresada por el usuario. La información obtenida incluye:
+- **Búsqueda con autocompletado** — más de 560 ciudades argentinas disponibles
+- **Temperatura animada** — contador animado con efecto neon al cargar los datos
+- **Datos completos** — temperatura, descripción, humedad, velocidad del viento y sensación térmica
+- **Diseño futurista** — glassmorphism, orbes de luz animados y partículas flotantes
+- **Responsive** — funciona en mobile y desktop
 
-- Temperatura actual.
-- Sensación térmica.
-- Humedad.
-- Velocidad del viento.
-- Dirección del viento.
+## Tecnologías
 
-Estos datos se muestran al usuario en una interfaz de usuario amigable utilizando el framework Materialize y mensajes emergentes SweetAlert.
+| Herramienta | Uso |
+|---|---|
+| [OpenWeatherMap API](https://openweathermap.org/api) | Datos meteorológicos en tiempo real |
+| [Materialize CSS](https://materializecss.com/) | Componente de autocompletado |
+| [SweetAlert2](https://sweetalert2.github.io/) | Alertas de error |
+| [Google Fonts](https://fonts.google.com/) | Orbitron + Exo 2 |
+
+## Cómo correr el proyecto
+
+No tiene build ni dependencias de runtime. Alcanza con servir el directorio raíz:
+
+```bash
+python3 -m http.server 8000
+# o
+npx http-server .
+```
+
+Luego abrís `http://localhost:8000` en el navegador.
+
+> Requiere conexión a internet para consultar la API de OpenWeatherMap.
+
+## Estructura
+
+```
+/
+├── index.html          # Punto de entrada único
+├── src/
+│   ├── css/
+│   │   ├── style.css           # Estilos personalizados
+│   │   └── materialize.min.css # Framework CSS (vendored)
+│   ├── js/
+│   │   ├── weather.js          # Toda la lógica de la app
+│   │   ├── materialize.min.js  # Framework JS (vendored)
+│   │   └── sweetalert2.all.min.js
+│   └── JSON/                   # Datasets de referencia (no usados en runtime)
+└── favicon.ico
+```
+
+## API
+
+Los datos provienen del endpoint `/weather` de OpenWeatherMap con los parámetros:
+- `q={ciudad},AR` — limita la búsqueda a Argentina
+- `units=metric` — temperatura en Celsius
+- `lang=es` — descripciones en español
+
+La API key está incluida en el código fuente (`weather.js` línea 1) — es una key pública de desarrollo.
+
+## Licencia
+
+MIT

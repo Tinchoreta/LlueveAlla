@@ -52,13 +52,15 @@
         <div class="search-wrapper">
             <div class="search-box">
                 <i class="material-icons search-icon">location_on</i>
-                <input
-                    type="text"
-                    id="autocomplete-input"
-                    class="autocomplete cities city-input"
-                    placeholder="Ingresá una ciudad..."
-                    autocomplete="off"
-                >
+                <!-- input-field requerido por Materialize para posicionar el dropdown de autocomplete -->
+                <div class="input-field ac-field">
+                    <input
+                        type="text"
+                        id="autocomplete-input"
+                        class="autocomplete cities city-input"
+                        placeholder="Ingresá una ciudad..."
+                    >
+                </div>
             </div>
             <button id="searchWeather" class="search-btn">
                 <i class="material-icons">search</i>
