@@ -190,6 +190,8 @@ html, body {
     gap: 0.75rem;
     width: 100%;
     max-width: 520px;
+    position: relative;
+    z-index: 100; /* encima del weather-card, que queda tapado por backdrop-filter */
 }
 
 .search-box {
